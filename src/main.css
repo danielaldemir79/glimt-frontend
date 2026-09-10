@@ -1,0 +1,19 @@
+:root {
+  font-family: "Segoe UI", sans-serif;
+}
+
+/* Gör elementens storlekar enklare att beräkna då padding och border inkluderas i elementets totala storlek */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
+
+/* Formulärfält och knappar använder sidans typsnitt */
+button,
+input,
+textarea {
+  font: inherit;
+}

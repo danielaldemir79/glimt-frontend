@@ -1,0 +1,20 @@
+.site-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  /* Begränsar innehållets bredd på stora skärmar */
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.site-header h1 {
+  margin: 0;
+}
+
+main {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding: 0 24px 24px;
+}
