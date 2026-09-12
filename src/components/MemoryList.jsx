@@ -1,4 +1,5 @@
 import MemoryCard from './MemoryCard.jsx'
+import './MemoryList.css'
 
 function MemoryList({ memories }) {
   return (

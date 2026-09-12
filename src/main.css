@@ -1,5 +1,8 @@
 :root {
   font-family: "Segoe UI", sans-serif;
+  line-height: 1.5;
+  color: #202622;
+  background-color: #f4f6f5;
 }
 
 /* Gör elementens storlekar enklare att beräkna då padding och border inkluderas i elementets totala storlek */

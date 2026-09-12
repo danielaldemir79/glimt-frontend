@@ -6,15 +6,52 @@
   /* Begränsar innehållets bredd på stora skärmar */
   max-width: 1120px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 16px;
 }
 
 .site-header h1 {
   margin: 0;
 }
 
-main {
+.main-content {
   max-width: 1120px;
   margin: 0 auto;
-  padding: 0 24px 24px;
+  padding: 0 16px 24px;
+}
+
+.new-memory-button {
+  padding: 8px 12px;
+  color: #ffffff;
+  background-color: #315c4c;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.new-memory-button:hover {
+  background-color: #25483b;
+}
+
+.new-memory-button:focus-visible {
+  outline: 3px solid #9fc5b5; 
+  outline-offset: 2px;
+}
+
+.memories-section {
+  margin-top: 32px;
+}
+
+.memories-section h2 {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+
+@media (min-width: 768px) {
+  .site-header {
+    padding: 24px;
+  }
+
+  .main-content {
+    padding: 0 24px 24px;
+  }
 }

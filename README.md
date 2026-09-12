@@ -20,3 +20,11 @@ Du behöver ha Node.js installerat.
    ```
 
 4. Öppna adressen som visas i terminalen, vanligtvis `http://localhost:5173/`.
+
+## Tekniska val
+
+### Responsiv layout
+
+Minneskorten visas med CSS Grid. Antalet kolumner anpassas efter skärmens bredd, vilket gör att appen fungerar på mobil, surfplatta och dator. Sidans innehåll har en maxbredd så att det inte blir för utspritt på stora skärmar.
+
+Bilderna visas med samma höjd och `object-fit: cover`. Det gör att bilder med olika originalformat fyller korten utan att bli utdragna.

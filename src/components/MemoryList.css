@@ -1,0 +1,11 @@
+.memory-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 24px;
+}
+
+@media (min-width: 768px) {
+  .memory-list {
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  }
+}
