@@ -46,6 +46,13 @@
   margin-bottom: 16px;
 }
 
+@media (min-width: 560px) and (max-width: 767px) {
+  .site-header,
+  .main-content {
+    max-width: 550px;
+  }
+}
+
 @media (min-width: 768px) {
   .site-header {
     padding: 24px;

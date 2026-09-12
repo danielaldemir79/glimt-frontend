@@ -4,6 +4,7 @@
   background-color: #ffffff;
   border: 1px solid #dedbd7;
   border-radius: 6px;
+  max-width: 520px;
 }
 
 .memory-card img {
@@ -28,10 +29,4 @@
 .memory-card-date {
   color: #5c5c5c;
   font-size: 14px;
-}
-
-@media (min-width: 768px) {
-  .memory-card {
-    max-width: 520px;
-  }
 }
