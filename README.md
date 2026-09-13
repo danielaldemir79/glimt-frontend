@@ -1,6 +1,6 @@
 # Glimt
 
-Glimt är en fotodagbok där användaren kan spara minnen med titel, datum, beskrivning och bild. Minnena ska kunna visas både i en kalender och i en tidslinje. Det ska gå att skapa, visa och redigera inlägg. Appen byggs med React och ska fungera på både dator och mobil.
+Glimt är en fotodagbok där användaren kan spara minnen med titel, datum, beskrivning och bild. Minnena ska kunna hittas med datumval och bläddring mellan minnesdagar samt visas i en tidslinje. Det ska gå att skapa, visa och redigera inlägg. Appen byggs med React och ska fungera på både dator och mobil.
 
 ## Starta frontend
 
@@ -22,6 +22,10 @@ Du behöver ha Node.js installerat.
 4. Öppna adressen som visas i terminalen, vanligtvis `http://localhost:5173/`.
 
 ## Tekniska val
+
+### Datumnavigering
+
+Appen använder webbläsarens inbyggda datumväljare och knappar för att bläddra mellan dagar som innehåller minnen. Det ger enkel kod, fungerar på olika enheter och undviker onödig kalenderlogik.
 
 ### Responsiv layout
 

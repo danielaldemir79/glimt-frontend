@@ -1,4 +1,6 @@
+import { useState } from 'react'
 import MemoryList from './components/MemoryList.jsx'
+import MemoryNavigator from './components/MemoryNavigator.jsx'
 import './App.css'
 
 // Testdata för minnen
@@ -48,6 +50,20 @@ const memories = [
 ]
 
 function App() {
+  // Tomt datum betyder att hela tidslinjen visas
+  const [selectedDate, setSelectedDate] = useState('')
+  
+  // Behåller bara minnen som tillhör det valda datumet
+  const selectedMemories = memories.filter(
+    (memory) => memory.date === selectedDate,
+  )
+
+  // Skapar en sorterad lista med datum som innehåller minnen. 
+  // Set är en samling som tar bort dubbletter. Bara unika datum behålls.
+  const memoryDates = [
+    ...new Set(memories.map((memory) => memory.date)),
+  ].sort()
+
   return (
     <>
       <header className="site-header">
@@ -59,13 +75,36 @@ function App() {
 
       <main className="main-content">
         <section>
-          <h2>Kalender</h2>
+          <h2>Hitta minnen</h2>
+          <MemoryNavigator 
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+            memoryDates={memoryDates} 
+          />
         </section>
 
         <section className="memories-section">
-          <h2>Senaste minnen</h2>
-          {/* Skickar testdatan till listkomponenten */}
-          <MemoryList memories={memories} />
+          {/* Växlar mellan vald dag och hela tidslinjen */}
+          {selectedDate ? (
+            <>
+              <h2>Vald dag</h2>
+
+              <button type="button" onClick={() => setSelectedDate('')}>
+                Visa alla minnen
+              </button>
+
+              {selectedMemories.length > 0 ? (
+                <MemoryList memories={selectedMemories} />
+              ) : (
+                <p>Inga minnen finns för detta datum.</p>
+              )}
+            </>
+          ) : (
+            <>
+              <h2>Senaste minnen</h2>
+              <MemoryList memories={memories} />
+            </>
+          )}
         </section>
       </main>
     </>
