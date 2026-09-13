@@ -11,6 +11,9 @@
 
 .site-header h1 {
   margin: 0;
+  color: #23483c;
+  font-family: Georgia, serif;
+  font-size: 36px;
 }
 
 .main-content {
@@ -20,16 +23,19 @@
 }
 
 .new-memory-button {
-  padding: 8px 12px;
+  min-height: 42px;
+  padding: 8px 16px;
   color: #ffffff;
+  font-weight: 600;
   background-color: #315c4c;
-  border: none;
+  border: 1px solid #315c4c;
   border-radius: 4px;
   cursor: pointer;
 }
 
 .new-memory-button:hover {
-  background-color: #25483b;
+  background-color: #17372d;
+  border-color: #17372d;
 }
 
 .new-memory-button:focus-visible {
@@ -41,9 +47,42 @@
   margin-top: 32px;
 }
 
-.memories-section h2 {
+.main-content h2 {
   margin-top: 0;
   margin-bottom: 16px;
+  color: #26332e;
+  font-size: 24px;
+}
+
+.show-all-button {
+  margin-bottom: 16px;
+  padding: 8px 12px;
+  color: #315c4c;
+  font-weight: 600;
+  background-color: transparent;
+  border: 1px solid #6e9988;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.show-all-button:hover {
+  color: #ffffff;
+  background-color: #315c4c;
+}
+
+.show-all-button:focus-visible {
+  outline: 3px solid #9fc5b5;
+  outline-offset: 2px;
+}
+
+.empty-message {
+  max-width: 520px;
+  margin: 0;
+  padding: 24px;
+  color: #555e59;
+  background-color: #ffffff;
+  border: 1px dashed #9aa8a1;
+  border-radius: 4px;
 }
 
 @media (min-width: 560px) and (max-width: 767px) {

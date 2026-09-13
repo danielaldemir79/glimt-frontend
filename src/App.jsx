@@ -89,14 +89,18 @@ function App() {
             <>
               <h2>Vald dag</h2>
 
-              <button type="button" onClick={() => setSelectedDate('')}>
+              <button
+                className="show-all-button"
+                type="button"
+                onClick={() => setSelectedDate('')}
+              >
                 Visa alla minnen
               </button>
 
               {selectedMemories.length > 0 ? (
                 <MemoryList memories={selectedMemories} />
               ) : (
-                <p>Inga minnen finns för detta datum.</p>
+                <p className="empty-message">Inga minnen finns för detta datum.</p>
               )}
             </>
           ) : (

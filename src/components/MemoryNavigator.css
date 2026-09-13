@@ -1,0 +1,74 @@
+.memory-navigator {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.date-field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.date-field label {
+  font-weight: 600;
+}
+
+.date-field input,
+.navigation-buttons button {
+  min-height: 42px;
+  padding: 8px 12px;
+  border-radius: 4px;
+}
+
+.date-field input {
+  width: 100%;
+  color: #202622;
+  background-color: #ffffff;
+  border: 1px solid #8d9993;
+}
+
+.navigation-buttons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}
+
+.navigation-buttons button {
+  color: #20483a;
+  font-weight: 600;
+  background-color: #e4eee9;
+  border: 1px solid #6e9988;
+  cursor: pointer;
+}
+
+.navigation-buttons button:hover:not(:disabled) {
+  color: #ffffff;
+  background-color: #315c4c;
+  border-color: #315c4c;
+}
+
+.navigation-buttons button:focus-visible,
+.date-field input:focus-visible {
+  outline: 3px solid #9fc5b5;
+  outline-offset: 2px;
+}
+
+.navigation-buttons button:disabled {
+  color: #8a8f8c;
+  background-color: #ecefed;
+  border-color: #d5dad7;
+  cursor: default;
+}
+
+@media (min-width: 768px) {
+  .memory-navigator {
+    display: grid;
+    grid-template-columns: 170px 360px;
+    align-items: end;
+  }
+
+  .navigation-buttons {
+    grid-template-columns: 176px 176px;
+  }
+}

@@ -24,6 +24,9 @@
 
 .memory-card-content h3 {
   margin: 12px 0;
+  color: #202622;
+  font-size: 18px;
+  line-height: 1.3;
 }
 
 .memory-card-date {
