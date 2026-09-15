@@ -1,6 +1,16 @@
 // URL till API
 const API_URL = 'https://localhost:7092/api/MemoryEntries' 
 
+async function getMemories() {
+  const response = await fetch(API_URL)
+
+  if (!response.ok) {
+    throw new Error('Kunde inte hämta minnen.')
+  }
+
+  return response.json()
+}
+
 async function createMemory(memory) { 
   
   const response = await fetch(API_URL, {
@@ -18,4 +28,4 @@ async function createMemory(memory) {
   return response.json()
 }
 
-export default createMemory
+export { getMemories, createMemory }

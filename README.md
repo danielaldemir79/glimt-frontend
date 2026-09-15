@@ -21,7 +21,45 @@ Du behöver ha Node.js installerat.
 
 4. Öppna adressen som visas i terminalen, vanligtvis `http://localhost:5173/`.
 
+## Starta backend
+
+Backend-repot finns här:
+
+https://github.com/danielaldemir79/glimt-api
+
+Du behöver ha .NET 10 SDK installerat.
+
+1. Öppna en terminal i backend-repots rotmapp.
+
+2. Hämta projektets paket:
+
+   ```bash
+   dotnet restore
+   ```
+
+3. Skapa databasen:
+
+   ```bash
+   dotnet ef database update
+   ```
+
+4. Starta API:t:
+
+   ```bash
+   dotnet run --launch-profile https
+   ```
+
+API:t körs på `https://localhost:7092`.
+
 ## Tekniska val
+
+### React och Web API   
+
+Frontend och backend ligger i separata repon. React ansvarar för gränssnittet och skickar HTTP anrop till vårt ASP.NET Core Web API. API:t hanterar databaslogiken och sparar minnen i SQLite.
+
+### Felhantering
+
+Om ett GET- eller POST-anrop misslyckas visas ett begripligt felmeddelande i appen i stället för att sidan kraschar.
 
 ### Datumnavigering
 
