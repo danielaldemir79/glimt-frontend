@@ -1,10 +1,11 @@
 import { useState } from 'react'
 import MemoryList from './components/MemoryList.jsx'
 import MemoryNavigator from './components/MemoryNavigator.jsx'
+import MemoryForm from './components/MemoryForm.jsx'
 import './App.css'
 
 // Testdata för minnen
-const memories = [
+const initialMemories = [
   {
     id: 6,
     title: 'Sommarens jordgubbar',
@@ -49,9 +50,15 @@ const memories = [
   },
 ]
 
+
 function App() {
   // Tomt datum betyder att hela tidslinjen visas
   const [selectedDate, setSelectedDate] = useState('')
+
+  const [isFormOpen, setIsFormOpen] = useState(false)
+
+  // Minneslistan blir state så att sidan kan uppdateras utan omladdning
+  const [memories, setMemories] = useState(initialMemories)
   
   // Behåller bara minnen som tillhör det valda datumet
   const selectedMemories = memories.filter(
@@ -64,15 +71,31 @@ function App() {
     ...new Set(memories.map((memory) => memory.date)),
   ].sort()
 
+
+  function addMemory(createdMemory) {
+    setMemories((currentMemories) => [
+      createdMemory,
+      ...currentMemories,
+    ])
+  }
+
   return (
     <>
       <header className="site-header">
         <h1>Glimt</h1>
-        <button className="new-memory-button" type="button">
-          + Nytt inlägg
-        </button>
+      <button
+        className="new-memory-button"
+        type="button"
+        onClick={() => setIsFormOpen(!isFormOpen)}
+      >
+        {isFormOpen ? 'Stäng formulär' : '+ Nytt inlägg'}
+      </button>
       </header>
 
+      {isFormOpen && (
+        <MemoryForm onMemoryCreated={addMemory} />
+      )}
+      
       <main className="main-content">
         <section>
           <h2>Hitta minnen</h2>

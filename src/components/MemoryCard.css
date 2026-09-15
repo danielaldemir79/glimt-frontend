@@ -33,3 +33,12 @@
   color: #5c5c5c;
   font-size: 14px;
 }
+
+.memory-card-image-placeholder {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 220px;
+  color: #66706b;
+  background-color: #e7ece9;
+}
