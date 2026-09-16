@@ -11,6 +11,7 @@ async function getMemories() {
   return response.json()
 }
 
+
 async function createMemory(memory) { 
   
   const response = await fetch(API_URL, {
@@ -28,4 +29,21 @@ async function createMemory(memory) {
   return response.json()
 }
 
-export { getMemories, createMemory }
+
+async function updateMemory(id, memory) {
+  const response = await fetch(`${API_URL}/${id}`, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(memory),
+  })
+
+  if (!response.ok) {
+    throw new Error('Kunde inte uppdatera minnet.')
+  }
+
+  return response.json()
+}
+
+export { getMemories, createMemory, updateMemory }

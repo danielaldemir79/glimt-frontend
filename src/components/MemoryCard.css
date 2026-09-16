@@ -42,3 +42,25 @@
   color: #66706b;
   background-color: #e7ece9;
 }
+
+.edit-memory-button {
+  min-height: 42px;
+  margin-top: 16px;
+  padding: 8px 12px;
+  color: #315c4c;
+  font-weight: 600;
+  background-color: transparent;
+  border: 1px solid #6e9988;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.edit-memory-button:hover {
+  color: #ffffff;
+  background-color: #315c4c;
+}
+
+.edit-memory-button:focus-visible {
+  outline: 3px solid #9fc5b5;
+  outline-offset: 2px;
+}

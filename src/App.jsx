@@ -9,25 +9,25 @@ import './App.css'
 function App() {
 
   const [selectedDate, setSelectedDate] = useState('')
-
   const [isFormOpen, setIsFormOpen] = useState(false)
-
   const [memories, setMemories] = useState([])
-
+  const [editingMemory, setEditingMemory] = useState(null)
   const [loadError, setLoadError] = useState('')
   
-  // Behåller bara minnen som tillhör det valda datumet
+
+  // Minnen som tillhör det valda datumet
   const selectedMemories = memories.filter(
     (memory) => memory.date === selectedDate,
   )
 
-  // Skapar en sorterad lista med datum som innehåller minnen. 
-  // Set är en samling som tar bort dubbletter. Bara unika datum behålls.
+
+  // Sorterad lista med datum som innehåller minnen. 
   const memoryDates = [
     ...new Set(memories.map((memory) => memory.date)),
   ].sort()
 
 
+  // Nytt minne
   function addMemory(createdMemory) {
     setMemories((currentMemories) => [
       createdMemory,
@@ -35,6 +35,36 @@ function App() {
     ])
   }
 
+
+  // Ersätter ett befintligt minne med ett uppdaterat minne
+  function replaceMemory(updatedMemory) {
+    setMemories((currentMemories) =>
+      currentMemories.map((memory) =>
+        memory.id === updatedMemory.id ? updatedMemory : memory,
+      )
+      .sort((firstMemory, secondMemory) =>
+        secondMemory.date.localeCompare(firstMemory.date),
+      ),
+    )
+    
+    setEditingMemory(null)
+    setIsFormOpen(false)
+  }
+
+  // Växlar visningen av formuläret för minnen
+  function toggleMemoryForm() {
+    setEditingMemory(null)
+    setIsFormOpen((currentIsOpen) => !currentIsOpen)
+  }
+
+  // Startar redigering av ett minne
+  function startEditing(memory) {
+    setEditingMemory(memory)
+    setIsFormOpen(true)
+  }
+
+
+  // Hämtar minnen från API vid komponentens start 
   useEffect(() => {
     async function loadMemories() {
       try {
@@ -57,14 +87,19 @@ function App() {
       <button
         className="new-memory-button"
         type="button"
-        onClick={() => setIsFormOpen(!isFormOpen)}
+        onClick={toggleMemoryForm}
       >
         {isFormOpen ? 'Stäng formulär' : '+ Nytt inlägg'}
       </button>
       </header>
 
       {isFormOpen && (
-        <MemoryForm onMemoryCreated={addMemory} />
+        <MemoryForm 
+          key={editingMemory?.id ?? 'new'}
+          onMemoryCreated={addMemory}
+          onMemoryUpdated={replaceMemory}
+          memoryToEdit={editingMemory} 
+        />
       )}
       
       <main className="main-content">
@@ -98,7 +133,10 @@ function App() {
               </button>
 
               {selectedMemories.length > 0 ? (
-                <MemoryList memories={selectedMemories} />
+                <MemoryList
+                  memories={selectedMemories}
+                  startEditing={startEditing}
+                />
               ) : (
                 <p className="empty-message">Inga minnen finns för detta datum.</p>
               )}
@@ -106,7 +144,10 @@ function App() {
           ) : (
             <>
               <h2>Senaste minnen</h2>
-              <MemoryList memories={memories} />
+              <MemoryList
+                memories={memories}
+                startEditing={startEditing}
+              />
             </>
           )}
         </section>
