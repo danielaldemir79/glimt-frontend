@@ -65,6 +65,12 @@ API:t körs på `https://localhost:7092`.
 
 Frontend och backend ligger i separata repon. React ansvarar för gränssnittet och skickar HTTP anrop till vårt ASP.NET Core Web API. API:t hanterar databaslogiken och sparar minnen i SQLite.
 
+### HTTPS under utveckling
+
+ASP.NET Core mallen skapade både en HTTP profil och en HTTPS profil för backend. Eftersom HTTP profilen ligger först väljer vi HTTPS profilen uttryckligen med `dotnet run --launch-profile https`. HTTPS krypterar trafiken mellan frontend och API.
+
+HTTPS profilen skyddar transporten men ger inte autentisering eller behörighetskontroll. I en produktionsmiljö hanteras HTTPS normalt av webbservern.
+
 ### Felhantering
 
 Om ett GET-, POST-, PUT- eller DELETE-anrop misslyckas visas ett begripligt felmeddelande i appen i stället för att sidan kraschar.
