@@ -1,6 +1,6 @@
 # Glimt
 
-Glimt är en fotodagbok där användaren kan spara minnen med titel, datum, beskrivning och bild. Minnena ska kunna hittas med datumval och bläddring mellan minnesdagar samt visas i en tidslinje. Det ska gå att skapa, visa och redigera inlägg. Appen byggs med React och ska fungera på både dator och mobil.
+Glimt är en fotodagbok där användaren kan spara minnen med titel, datum, beskrivning och bild. Minnena ska kunna hittas med datumval och bläddring mellan minnesdagar samt visas i en tidslinje. Det går att skapa, visa, redigera och ta bort inlägg. Appen byggs med React och ska fungera på både dator och mobil.
 
 ## Starta frontend
 
@@ -28,6 +28,14 @@ Backend-repot finns här:
 https://github.com/danielaldemir79/glimt-api
 
 Du behöver ha .NET 10 SDK installerat.
+
+Om datorn inte redan litar på .NET:s utvecklingscertifikat, kör följande kommando en gång:
+
+```bash
+dotnet dev-certs https --trust
+```
+
+Kommandot behövs för att webbläsaren och frontend ska kunna ansluta till det lokala API:t via HTTPS.
 
 1. Öppna en terminal i backend-repots rotmapp.
 
@@ -59,11 +67,13 @@ Frontend och backend ligger i separata repon. React ansvarar för gränssnittet 
 
 ### Felhantering
 
-Om ett GET- eller POST-anrop misslyckas visas ett begripligt felmeddelande i appen i stället för att sidan kraschar.
+Om ett GET-, POST-, PUT- eller DELETE-anrop misslyckas visas ett begripligt felmeddelande i appen i stället för att sidan kraschar.
 
 ### Datumnavigering
 
 Appen använder webbläsarens inbyggda datumväljare och knappar för att bläddra mellan dagar som innehåller minnen. Det ger enkel kod, fungerar på olika enheter och undviker onödig kalenderlogik.
+
+Knapparna för äldre och nyare minne är inaktiverade när det inte finns något minnesdatum att gå till. Därför är båda knapparna gråmarkerade när appen startar utan valt datum. När ett datum med närliggande minnen väljs aktiveras den knapp som går att använda.
 
 ### Responsiv layout
 

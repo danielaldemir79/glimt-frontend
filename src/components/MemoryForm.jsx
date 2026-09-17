@@ -43,8 +43,12 @@ function MemoryForm({ onMemoryCreated, onMemoryUpdated, memoryToEdit }) {
         setDate('')
         setDescription('')
       }
-    } catch{
-      setErrorMessage('Ett fel uppstod vid skapandet av minnet.')
+    } catch {
+      setErrorMessage(
+        memoryToEdit
+          ? 'Ett fel uppstod när minnet skulle uppdateras.'
+          : 'Ett fel uppstod när minnet skulle skapas.',
+      )
     }
 
   }

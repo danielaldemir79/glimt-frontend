@@ -1,6 +1,6 @@
 import './MemoryCard.css'
 
-function MemoryCard({ memory, startEditing, title, date, description, image }) {
+function MemoryCard({ memory, startEditing, removeMemory, title, date, description, image }) {
   return (
     <article className="memory-card">
       {image ? (
@@ -15,13 +15,22 @@ function MemoryCard({ memory, startEditing, title, date, description, image }) {
         <p className="memory-card-date">{date}</p>
         <h3>{title}</h3>
         <p>{description}</p>
-        <button
-          className="edit-memory-button"
-          type="button"
-          onClick={() => startEditing(memory)}
-        >
-          Redigera
-        </button>
+        <div className="memory-card-actions">
+          <button
+            className="edit-memory-button"
+            type="button"
+            onClick={() => startEditing(memory)}
+          >
+            Redigera
+          </button>
+          <button
+            className="delete-memory-button"
+            type="button"
+            onClick={() => removeMemory(memory)}
+          >
+            Ta bort
+          </button>
+        </div>
       </div>
     </article>
   )

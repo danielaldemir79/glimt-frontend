@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import MemoryList from './components/MemoryList.jsx'
 import MemoryNavigator from './components/MemoryNavigator.jsx'
 import MemoryForm from './components/MemoryForm.jsx'
-import { getMemories } from './api/memoryApi.js'
+import { deleteMemory, getMemories } from './api/memoryApi.js'
 import './App.css'
 
 
@@ -12,6 +12,7 @@ function App() {
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [memories, setMemories] = useState([])
   const [editingMemory, setEditingMemory] = useState(null)
+  const [deleteError, setDeleteError] = useState('')
   const [loadError, setLoadError] = useState('')
   
 
@@ -29,10 +30,12 @@ function App() {
 
   // Nytt minne
   function addMemory(createdMemory) {
-    setMemories((currentMemories) => [
-      createdMemory,
-      ...currentMemories,
-    ])
+    setMemories((currentMemories) =>
+      [createdMemory, ...currentMemories].sort(
+        (firstMemory, secondMemory) =>
+          secondMemory.date.localeCompare(firstMemory.date),
+      ),
+    )
   }
 
 
@@ -50,6 +53,32 @@ function App() {
     setEditingMemory(null)
     setIsFormOpen(false)
   }
+
+  // Tar bort ett minne
+  async function removeMemory(memory) {
+    const shouldDelete = window.confirm(
+      `Vill du ta bort "${memory.title}"?`,
+    )
+
+    if (!shouldDelete) {
+      return
+    }
+
+    try {
+      setDeleteError('')
+
+      await deleteMemory(memory.id)
+
+      setMemories((currentMemories) =>
+        currentMemories.filter(
+          (currentMemory) => currentMemory.id !== memory.id,
+        ),
+      )
+    } catch {
+      setDeleteError('Kunde inte ta bort minnet. Försök igen.')
+    }
+  }
+
 
   // Växlar visningen av formuläret för minnen
   function toggleMemoryForm() {
@@ -118,6 +147,12 @@ function App() {
           </p>
         )}
 
+        {deleteError && (
+          <p className="empty-message" role="alert">
+            {deleteError}
+          </p>
+        )}
+
         <section className="memories-section">
           {/* Växlar mellan vald dag och hela tidslinjen */}
           {selectedDate ? (
@@ -136,6 +171,7 @@ function App() {
                 <MemoryList
                   memories={selectedMemories}
                   startEditing={startEditing}
+                  removeMemory={removeMemory}
                 />
               ) : (
                 <p className="empty-message">Inga minnen finns för detta datum.</p>
@@ -147,6 +183,7 @@ function App() {
               <MemoryList
                 memories={memories}
                 startEditing={startEditing}
+                removeMemory={removeMemory}
               />
             </>
           )}

@@ -44,15 +44,9 @@
 }
 
 .edit-memory-button {
-  min-height: 42px;
-  margin-top: 16px;
-  padding: 8px 12px;
   color: #315c4c;
-  font-weight: 600;
   background-color: transparent;
   border: 1px solid #6e9988;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
 .edit-memory-button:hover {
@@ -62,5 +56,35 @@
 
 .edit-memory-button:focus-visible {
   outline: 3px solid #9fc5b5;
+  outline-offset: 2px;
+}
+
+.memory-card-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.memory-card-actions button {
+  min-height: 42px;
+  padding: 8px 12px;
+  font-weight: 600;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.delete-memory-button {
+  color: #8a2525;
+  background-color: transparent;
+  border: 1px solid #b76b6b;
+}
+
+.delete-memory-button:hover {
+  color: #ffffff;
+  background-color: #8a2525;
+}
+
+.delete-memory-button:focus-visible {
+  outline: 3px solid #d9a3a3;
   outline-offset: 2px;
 }
