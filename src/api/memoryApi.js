@@ -1,5 +1,6 @@
 // URL till API
 const API_URL = 'https://localhost:7092/api/MemoryEntries' 
+const IMAGE_UPLOAD_URL = 'https://localhost:7092/api/Images'
 
 async function getMemories() {
   const response = await fetch(API_URL)
@@ -56,4 +57,22 @@ async function deleteMemory(id) {
   }
 }
 
-export { getMemories, createMemory, updateMemory, deleteMemory }
+async function uploadImage(image) {
+  const formData = new FormData()
+  formData.append('image', image)
+
+  const response = await fetch(IMAGE_UPLOAD_URL, {
+    method: 'POST',
+    body: formData,
+  })
+
+  if (!response.ok) {
+    const errorMessage = await response.text()
+
+    throw new Error(errorMessage || 'Kunde inte ladda upp bilden.')
+  }
+
+  return response.json()
+}
+
+export { getMemories, createMemory, updateMemory, deleteMemory, uploadImage }

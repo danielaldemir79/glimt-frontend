@@ -15,7 +15,7 @@ function MemoryList({ memories, startEditing, removeMemory }) {
           title={memory.title}
           date={memory.date}
           description={memory.description}
-          image={memory.image}
+          imagePath={memory.imagePath}
         />
       ))}
     </div>

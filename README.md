@@ -82,6 +82,10 @@ ASP.NET Core mallen skapade separata profiler för HTTP och HTTPS. Frontend anro
 
 Om ett GET-, POST-, PUT- eller DELETE-anrop misslyckas visas ett begripligt felmeddelande i appen i stället för att sidan kraschar.
 
+### Bilduppladdning
+
+Frontend skickar först den valda bildfilen till API:ts bilduppladdning. API:t returnerar bildens publika sökväg, som sedan sparas tillsammans med minnets övriga uppgifter. Om ingen ny bild väljs vid redigering behålls den befintliga bilden.
+
 ### Datumnavigering
 
 Appen använder webbläsarens inbyggda datumväljare och knappar för att bläddra mellan dagar som innehåller minnen. Det ger enkel kod, fungerar på olika enheter och undviker onödig kalenderlogik.

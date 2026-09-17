@@ -1,4 +1,4 @@
-import { createMemory, updateMemory } from '../api/memoryApi.js'
+import { createMemory, updateMemory, uploadImage } from '../api/memoryApi.js'
 import { useEffect, useRef, useState } from 'react'
 import './MemoryForm.css'
 
@@ -8,10 +8,12 @@ function MemoryForm({ onMemoryCreated, onMemoryUpdated, memoryToEdit }) {
   const [date, setDate] = useState(memoryToEdit?.date ?? '')
   const [description, setDescription] = useState(memoryToEdit?.description ?? '')
   const [errorMessage, setErrorMessage] = useState('')
+  const [image, setImage] = useState(null)
 
   const formRef = useRef(null)
+  const imageInputRef = useRef(null)
 
-  useEffect(() => {
+  useEffect(() => { 
     formRef.current?.scrollIntoView({
       behavior: 'smooth',
       block: 'start',
@@ -23,15 +25,21 @@ function MemoryForm({ onMemoryCreated, onMemoryUpdated, memoryToEdit }) {
     
     setErrorMessage('')
 
-    const newMemory = {
-      title,
-      date,
-      description,
-      imagePath: null,
-    }
-
-
     try {
+      let imagePath = memoryToEdit?.imagePath ?? null
+
+      if (image) {
+        const uploadResult = await uploadImage(image)
+        imagePath = uploadResult.imagePath
+      }
+
+      const newMemory = {
+        title,
+        date,
+        description,
+        imagePath,
+      }
+
       if (memoryToEdit) {
         const updatedMemory = await updateMemory(memoryToEdit.id, newMemory)
         onMemoryUpdated(updatedMemory)
@@ -42,12 +50,15 @@ function MemoryForm({ onMemoryCreated, onMemoryUpdated, memoryToEdit }) {
         setTitle('')
         setDate('')
         setDescription('')
+        setImage(null)
+        imageInputRef.current.value = ''
       }
-    } catch {
+    } catch (error) {
       setErrorMessage(
-        memoryToEdit
-          ? 'Ett fel uppstod när minnet skulle uppdateras.'
-          : 'Ett fel uppstod när minnet skulle skapas.',
+        error.message ||
+          (memoryToEdit
+            ? 'Ett fel uppstod när minnet skulle uppdateras.'
+            : 'Ett fel uppstod när minnet skulle skapas.'),
       )
     }
 
@@ -83,6 +94,21 @@ function MemoryForm({ onMemoryCreated, onMemoryUpdated, memoryToEdit }) {
         onChange={(event) => setDescription(event.target.value)}
         required
       />
+
+      <label htmlFor="memory-image">Bild</label>
+      <input
+        ref={imageInputRef}
+        id="memory-image"
+        type="file"
+        accept=".jpg,.jpeg,.png,.webp"
+        onChange={(event) => setImage(event.target.files[0] ?? null)}
+      />
+
+      {memoryToEdit && (
+        <small>
+          Lämna bildfältet tomt för att behålla nuvarande bild.
+        </small>
+      )}
 
       {errorMessage && (
         <p role="alert">{errorMessage}</p>

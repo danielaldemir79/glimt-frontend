@@ -1,10 +1,13 @@
 import './MemoryCard.css'
 
-function MemoryCard({ memory, startEditing, removeMemory, title, date, description, image }) {
+function MemoryCard({ memory, startEditing, removeMemory, title, date, description, imagePath }) {
   return (
     <article className="memory-card">
-      {image ? (
-        <img src={image} alt={title} />
+      {imagePath ? (
+        <img
+          src={`https://localhost:7092${imagePath}`}
+          alt={title}
+        />
       ) : (
         <div className="memory-card-image-placeholder">
           Bild saknas
