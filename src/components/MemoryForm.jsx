@@ -9,9 +9,9 @@ function MemoryForm({ onMemoryCreated, onMemoryUpdated, memoryToEdit }) {
   const [description, setDescription] = useState(memoryToEdit?.description ?? '')
   const [errorMessage, setErrorMessage] = useState('')
   const [image, setImage] = useState(null)
+  const [isSaving, setIsSaving] = useState(false)
 
   const formRef = useRef(null)
-  const imageInputRef = useRef(null)
 
   useEffect(() => { 
     formRef.current?.scrollIntoView({
@@ -22,6 +22,12 @@ function MemoryForm({ onMemoryCreated, onMemoryUpdated, memoryToEdit }) {
 
   async function handleSubmit(event) {
     event.preventDefault()
+
+    if (isSaving) {
+      return
+    }
+
+    setIsSaving(true)
     
     setErrorMessage('')
 
@@ -46,20 +52,15 @@ function MemoryForm({ onMemoryCreated, onMemoryUpdated, memoryToEdit }) {
       } else {
         const createdMemory = await createMemory(newMemory)
         onMemoryCreated(createdMemory)
-
-        setTitle('')
-        setDate('')
-        setDescription('')
-        setImage(null)
-        imageInputRef.current.value = ''
       }
     } catch (error) {
       setErrorMessage(
-        error.message ||
-          (memoryToEdit
-            ? 'Ett fel uppstod när minnet skulle uppdateras.'
-            : 'Ett fel uppstod när minnet skulle skapas.'),
+        error instanceof TypeError
+          ? 'Kunde inte ansluta till API:t. Kontrollera att backend är igång.'
+          : error.message,
       )
+    } finally {
+      setIsSaving(false)
     }
 
   }
@@ -77,9 +78,9 @@ function MemoryForm({ onMemoryCreated, onMemoryUpdated, memoryToEdit }) {
         required
       />
 
-      <label htmlFor="memory-date">Datum</label>
+      <label htmlFor="memory-entry-date">Datum</label>
       <input
-        id="memory-date"
+        id="memory-entry-date"
         type="date"
         value={date}
         onChange={(event) => setDate(event.target.value)}
@@ -97,7 +98,6 @@ function MemoryForm({ onMemoryCreated, onMemoryUpdated, memoryToEdit }) {
 
       <label htmlFor="memory-image">Bild</label>
       <input
-        ref={imageInputRef}
         id="memory-image"
         type="file"
         accept=".jpg,.jpeg,.png,.webp"
@@ -114,8 +114,12 @@ function MemoryForm({ onMemoryCreated, onMemoryUpdated, memoryToEdit }) {
         <p role="alert">{errorMessage}</p>
       )}
 
-      <button type="submit">
-        {memoryToEdit ? 'Spara ändringar' : 'Spara minne'}
+      <button type="submit" disabled={isSaving}>
+        {isSaving
+          ? 'Sparar...'
+          : memoryToEdit
+            ? 'Spara ändringar'
+            : 'Spara minne'}
       </button>
     </form>
   )

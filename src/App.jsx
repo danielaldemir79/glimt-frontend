@@ -36,6 +36,7 @@ function App() {
           secondMemory.date.localeCompare(firstMemory.date),
       ),
     )
+    setIsFormOpen(false)
   }
 
 
@@ -180,11 +181,19 @@ function App() {
           ) : (
             <>
               <h2>Senaste minnen</h2>
-              <MemoryList
-                memories={memories}
-                startEditing={startEditing}
-                removeMemory={removeMemory}
-              />
+              {memories.length > 0 && (
+                <MemoryList
+                  memories={memories}
+                  startEditing={startEditing}
+                  removeMemory={removeMemory}
+                />
+              )}
+
+              {memories.length === 0 && !loadError && (
+                <p className="empty-message">
+                  Inga minnen ännu. Skapa ditt första inlägg.
+                </p>
+              )}
             </>
           )}
         </section>

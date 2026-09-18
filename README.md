@@ -6,7 +6,7 @@ Glimt är en fotodagbok där användaren kan spara minnen med titel, datum, besk
 
 Backend måste vara igång innan frontend öppnas. Följ först instruktionerna under Starta backend och återgå sedan hit.
 
-Du behöver ha Node.js installerat.
+Du behöver ha Node.js 22.12 eller senare installerat.
 
 1. Öppna en terminal i frontend-repots rotmapp.
 2. Installera projektets paket:
@@ -67,6 +67,8 @@ dotnet tool install --global dotnet-ef --version 10.0.12
    ```
 
 API:t körs på `https://localhost:7092`.
+
+Låt API:t fortsätta köra. Öppna sedan en ny terminal och återgå till stegen under Starta frontend.
 
 ## Tekniska val
 

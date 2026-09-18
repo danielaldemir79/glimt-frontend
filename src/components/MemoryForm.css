@@ -46,9 +46,15 @@
   cursor: pointer;
 }
 
-.memory-form button:hover {
+.memory-form button:hover:not(:disabled) {
   background-color: #17372d;
   border-color: #17372d;
+}
+
+.memory-form button:disabled {
+  background-color: #8a8f8c;
+  border-color: #8a8f8c;
+  cursor: wait;
 }
 
 .memory-form input:focus-visible,
