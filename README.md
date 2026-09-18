@@ -5,7 +5,7 @@ Glimt är en fotodagbok där användaren kan spara minnen med titel, datum, besk
 ## Starta frontend
 
 Backend måste vara igång innan frontend öppnas. Följ först instruktionerna under Starta backend och återgå sedan hit.
-https://github.com/danielaldemir79/glimt-api
+Backend Repot finner du här --> https://github.com/danielaldemir79/glimt-api
 
 Du behöver ha Node.js 22.12 eller senare installerat.
 
