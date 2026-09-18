@@ -77,6 +77,17 @@ Låt API:t fortsätta köra. Öppna sedan en ny terminal och återgå till stege
 
 Frontend och backend ligger i separata repon. React ansvarar för gränssnittet och skickar HTTP anrop via HTTPS till vårt ASP.NET Core Web API. API:t hanterar databaslogiken och hämtar, skapar, uppdaterar och tar bort minnen i SQLite.
 
+### Komponentindelning och API-lager
+
+Gränssnittet är uppdelat i mindre React komponenter för bland annat formulär, navigering, lista och minneskort. Det gör att varje komponent får ett tydligt ansvar och att koden blir enklare att läsa, ändra och underhålla.
+
+API anropen ligger separat i `memoryApi.js`. På så sätt hålls kommunikationen med backend samlad på ett ställe och behöver inte upprepas i flera komponenter.
+
+### State och datahämtning
+
+React `useState` används för information som förändras medan appen används, till exempel minnen, valt datum och formulärets läge. `useEffect` används för att hämta minnen från API:t när applikationen startar.
+
+
 ### HTTPS under utveckling
 
 ASP.NET Core mallen skapade separata profiler för HTTP och HTTPS. Frontend anropar `https://localhost:7092`, därför startar vi API:t med `dotnet run --launch-profile https`. HTTPS krypterar trafiken mellan frontend och API.
