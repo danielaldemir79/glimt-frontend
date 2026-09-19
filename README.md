@@ -99,6 +99,12 @@ Om ett GET-, POST-, PUT- eller DELETE-anrop misslyckas visas ett begripligt felm
 
 Frontend skickar först den valda bildfilen till API:ts bilduppladdning. API:t returnerar bildens publika sökväg, som sedan sparas tillsammans med minnets övriga uppgifter. Om ingen ny bild väljs vid redigering behålls den befintliga bilden.
 
+### Förhandsvisning och detaljvy
+
+Minneskorten fungerar som förhandsvisningar. Bilderna fyller kortens fasta bildyta och långa beskrivningar begränsas till tre rader för att korten ska behålla en jämn layout. Titlar begränsas till 45 tecken i formuläret och lång text bryts så att den inte hamnar utanför kortet.
+
+När användaren klickar på ett minneskort öppnas en detaljvy ovanpå sidan. Där visas hela bilden utan beskärning samt minnets fullständiga titel, datum och beskrivning. Detaljvyn kan scrollas om innehållet är större än skärmen.
+
 ### Datumnavigering
 
 Appen använder webbläsarens inbyggda datumväljare och knappar för att bläddra mellan dagar som innehåller minnen. Det ger enkel kod, fungerar på olika enheter och undviker onödig kalenderlogik.

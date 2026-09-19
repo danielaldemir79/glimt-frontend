@@ -1,7 +1,7 @@
 import MemoryCard from './MemoryCard.jsx'
 import './MemoryList.css'
 
-function MemoryList({ memories, startEditing, removeMemory }) {
+function MemoryList({ memories, startEditing, removeMemory, openMemory }) {
   return (
     <div className="memory-list">
       {memories.map((memory) => (
@@ -11,6 +11,7 @@ function MemoryList({ memories, startEditing, removeMemory }) {
           memory={memory}
           startEditing={startEditing}
           removeMemory={removeMemory}
+          openMemory={openMemory}
 
           title={memory.title}
           date={memory.date}

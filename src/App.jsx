@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react'
 import MemoryList from './components/MemoryList.jsx'
 import MemoryNavigator from './components/MemoryNavigator.jsx'
 import MemoryForm from './components/MemoryForm.jsx'
+import MemoryDetails from './components/MemoryDetails.jsx'
 import { deleteMemory, getMemories } from './api/memoryApi.js'
 import './App.css'
 
@@ -12,6 +13,7 @@ function App() {
   const [isFormOpen, setIsFormOpen] = useState(false)
   const [memories, setMemories] = useState([])
   const [editingMemory, setEditingMemory] = useState(null)
+  const [selectedMemory, setSelectedMemory] = useState(null)
   const [deleteError, setDeleteError] = useState('')
   const [loadError, setLoadError] = useState('')
   
@@ -91,6 +93,16 @@ function App() {
   function startEditing(memory) {
     setEditingMemory(memory)
     setIsFormOpen(true)
+  }
+
+  // Öppnar ett minne
+  function openMemory(memory) {
+    setSelectedMemory(memory);
+  }
+
+  // Stänger det öppna minnet
+  function closeMemory() {
+    setSelectedMemory(null);
   }
 
 
@@ -173,6 +185,7 @@ function App() {
                   memories={selectedMemories}
                   startEditing={startEditing}
                   removeMemory={removeMemory}
+                  openMemory={openMemory}
                 />
               ) : (
                 <p className="empty-message">Inga minnen finns för detta datum.</p>
@@ -186,6 +199,7 @@ function App() {
                   memories={memories}
                   startEditing={startEditing}
                   removeMemory={removeMemory}
+                  openMemory={openMemory}
                 />
               )}
 
@@ -198,6 +212,13 @@ function App() {
           )}
         </section>
       </main>
+
+      {selectedMemory && (
+        <MemoryDetails
+          memory={selectedMemory}
+          closeMemory={closeMemory}
+        />
+      )}
     </>
   )
 }

@@ -74,9 +74,11 @@ function MemoryForm({ onMemoryCreated, onMemoryUpdated, memoryToEdit }) {
         id="memory-title"
         type="text"
         value={title}
+        maxLength={45}
         onChange={(event) => setTitle(event.target.value)}
         required
       />
+      <small>{title.length}/45 tecken</small>
 
       <label htmlFor="memory-entry-date">Datum</label>
       <input
