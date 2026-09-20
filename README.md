@@ -82,10 +82,21 @@ Gränssnittet är uppdelat i mindre React komponenter för bland annat formulär
 
 API anropen ligger separat i `memoryApi.js`. På så sätt hålls kommunikationen med backend samlad på ett ställe och behöver inte upprepas i flera komponenter.
 
+### Fetch och FormData
+
+Frontend använder `fetch` för att skicka anrop till API:t. Information om minnen skickas som JSON.
+
+Bilder skickas med `FormData`, eftersom det är ett sätt att skicka filer till API:t.
+
 ### State och datahämtning
 
 React `useState` används för information som förändras medan appen används, till exempel minnen, valt datum och formulärets läge. `useEffect` används för att hämta minnen från API:t när applikationen startar.
 
+### Filtrering och uppdatering av minnen
+
+Valda minnen och datum tas fram från listan med alla minnen. Vi behöver därför inte spara samma information på flera ställen.
+
+När ett minne skapas, ändras eller tas bort uppdateras listan direkt. Frontend behöver därför inte hämta alla minnen från API:t igen.
 
 ### HTTPS under utveckling
 
@@ -94,6 +105,12 @@ ASP.NET Core mallen skapade separata profiler för HTTP och HTTPS. Frontend anro
 ### Felhantering
 
 Om ett GET-, POST-, PUT- eller DELETE-anrop misslyckas visas ett begripligt felmeddelande i appen i stället för att sidan kraschar.
+
+### Formulär och skydd mot flera sparningar
+
+Formulärets värden sparas i React state. Fälten använder också webbläsarens inbyggda kontroller, till exempel `required`, `maxLength` och begränsning av tillåtna bildformat.
+
+Spara-knappen stängs av medan ett minne sparas. Det förhindrar att användaren råkar skicka samma formulär flera gånger.
 
 ### Bilduppladdning
 
@@ -116,3 +133,17 @@ Knapparna för äldre och nyare minne är inaktiverade när det inte finns någo
 Minneskorten visas med CSS Grid. Antalet kolumner anpassas efter skärmens bredd, vilket gör att appen fungerar på mobil, surfplatta och dator. Sidans innehåll har en maxbredd så att det inte blir för utspritt på stora skärmar.
 
 Bilderna visas med samma höjd och `object-fit: cover`. Det gör att bilder med olika originalformat fyller korten utan att bli utdragna.
+
+### Tillgänglighet
+
+Vi har gjort appen lättare att använda med tangentbord och skärmläsare. En skärmläsare är ett hjälpmedel som läser upp sidans innehåll för personer som har svårt att se.
+
+Formulärfälten har labels som hjälper skärmläsaren att beskriva fälten. Felmeddelanden använder `role="alert"` för att visa att meddelandet är viktigt. Detaljvyn använder `role="dialog"` för att visa att en ruta har öppnats ovanpå sidan.
+
+Det syns också tydligt vilket fält eller vilken knapp som är vald när appen används med tangentbord.
+
+## Begränsningar och vidareutveckling
+
+Adressen till API:t är just nu skriven direkt i frontendkoden. I en publicerad version hade den i stället kunnat läsas från en miljövariabel.
+
+Detaljvyn kan vidareutvecklas så att den går att stänga med Escape och hanterar tangentbordsfokus bättre. API:t kan också få samma gräns på 45 tecken för titeln som formuläret redan har.
