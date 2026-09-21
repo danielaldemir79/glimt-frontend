@@ -2,9 +2,15 @@
 
 Glimt är en fotodagbok där användaren kan spara minnen med titel, datum, beskrivning och bild. Minnena ska kunna hittas med datumval och bläddring mellan minnesdagar samt visas i en tidslinje. Det går att skapa, visa, redigera och ta bort inlägg. Appen byggs med React och ska fungera på både dator och mobil.
 
-## Starta frontend
+## Innan du startar frontend
 
-Backend måste vara igång innan frontend öppnas. Följ först instruktionerna under Starta backend och återgå sedan hit.
+Backend måste installeras och startas först. Följ instruktionerna i backend repot:
+
+https://github.com/danielaldemir79/glimt-api
+
+Låt backend fortsätta köra och återgå sedan till den här sidan.
+
+## Starta frontend
 
 Du behöver ha Node.js 22.12 eller senare installerat.
 
@@ -23,52 +29,6 @@ Du behöver ha Node.js 22.12 eller senare installerat.
 
 4. Öppna `http://localhost:5173/`. Frontend måste använda port 5173 på grund av vår CORS inställning i API:t, som bara tillåter anrop från den adressen.
 
-
-## Starta backend
-
-Backend-repot finns här:
-
-https://github.com/danielaldemir79/glimt-api
-
-Du behöver ha .NET 10 SDK installerat.
-
-Om datorn inte redan litar på .NET:s utvecklingscertifikat, kör följande kommando en gång:
-
-```bash
-dotnet dev-certs https --trust
-```
-
-Kommandot behövs för att webbläsaren och frontend ska kunna ansluta till det lokala API:t via HTTPS.
-
-1. Öppna en terminal i backend-repots rotmapp.
-
-2. Hämta projektets paket:
-
-   ```bash
-   dotnet restore
-   ```
-
-Om `dotnet ef` inte finns installerat, installera verktyget:
-
-```bash
-dotnet tool install --global dotnet-ef --version 10.0.12
-```
-
-3. Skapa databasen:
-
-   ```bash
-   dotnet ef database update
-   ```
-
-4. Starta API:t:
-
-   ```bash
-   dotnet run --launch-profile https
-   ```
-
-API:t körs på `https://localhost:7092`.
-
-Låt API:t fortsätta köra. Öppna sedan en ny terminal och återgå till stegen under Starta frontend.
 
 ## Tekniska val
 
@@ -97,10 +57,6 @@ React `useState` används för information som förändras medan appen används,
 Valda minnen och datum tas fram från listan med alla minnen. Vi behöver därför inte spara samma information på flera ställen.
 
 När ett minne skapas, ändras eller tas bort uppdateras listan direkt. Frontend behöver därför inte hämta alla minnen från API:t igen.
-
-### HTTPS under utveckling
-
-ASP.NET Core mallen skapade separata profiler för HTTP och HTTPS. Frontend anropar `https://localhost:7092`, därför startar vi API:t med `dotnet run --launch-profile https`. HTTPS krypterar trafiken mellan frontend och API.
 
 ### Felhantering
 
