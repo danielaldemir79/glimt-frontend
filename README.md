@@ -4,11 +4,17 @@ Glimt är en fotodagbok där användaren kan spara minnen med titel, datum, besk
 
 ## Innan du startar frontend
 
-Backend måste installeras och startas först. Följ instruktionerna i backend repot:
+Backend måste vara installerad, databasen skapad och API:t startat innan
+frontend kan köras.
+
+Följ avsnitten `Installera och skapa databasen` och
+`Starta API:t för webbappen` i backend repots README:
 
 https://github.com/danielaldemir79/glimt-api
 
-Låt backend fortsätta köra och återgå sedan till den här sidan.
+Låt API terminalen fortsätta köra. Öppna sedan en ny terminal och fortsätt
+med stegen nedan. Om API:t inte körs visar webbappen ett felmeddelande och
+kan inte hämta eller spara minnen.
 
 ## Starta frontend
 

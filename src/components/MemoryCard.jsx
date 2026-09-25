@@ -1,6 +1,6 @@
 import './MemoryCard.css'
 
-function MemoryCard({ memory, startEditing, removeMemory, openMemory, title, date, description, imagePath }) {
+function MemoryCard({ memory, startEditing, removeMemory, openMemory }) {
   return (
     <article className="memory-card">
       <button
@@ -8,10 +8,10 @@ function MemoryCard({ memory, startEditing, removeMemory, openMemory, title, dat
         type="button"
         onClick={() => openMemory(memory)}
       >
-        {imagePath ? (
+        {memory.imagePath ? (
           <img
-            src={`https://localhost:7092${imagePath}`}
-            alt={title}
+            src={`https://localhost:7092${memory.imagePath}`}
+            alt={memory.title}
           />
         ) : (
           <div className="memory-card-image-placeholder">
@@ -20,9 +20,9 @@ function MemoryCard({ memory, startEditing, removeMemory, openMemory, title, dat
         )}
 
         <div className="memory-card-content">
-          <p className="memory-card-date">{date}</p>
-          <h3>{title}</h3>
-          <p className="memory-card-description">{description}</p>
+          <p className="memory-card-date">{memory.date}</p>
+          <h3>{memory.title}</h3>
+          <p className="memory-card-description">{memory.description}</p>
           <span className="memory-card-open-label">
             Visa hela minnet
           </span>

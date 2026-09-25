@@ -12,11 +12,6 @@ function MemoryList({ memories, startEditing, removeMemory, openMemory }) {
           startEditing={startEditing}
           removeMemory={removeMemory}
           openMemory={openMemory}
-
-          title={memory.title}
-          date={memory.date}
-          description={memory.description}
-          imagePath={memory.imagePath}
         />
       ))}
     </div>
